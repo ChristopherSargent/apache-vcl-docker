@@ -9,6 +9,25 @@ services:
     image: vcl-db
     volumes:
       - mysql_data:/var/lib/mysql
+  
+  web:
+    build: web
+    env_file: .env
+    volumes:
+      - web_logs:/var/log/apache2
+      - ../vcl/web:/var/www/html
+      - ../dev-conf:/etc/vcl-web-conf
+    ports:
+      - "80:80"
+      - "443:443"
+    links:
+      - db:db
+    depends_on:
+      - db
+    domainname: vcl.local
+    hostname: web
+    image: vcl-web
 
 volumes:
   mysql_data:
+  web_logs:
