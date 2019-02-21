@@ -16,7 +16,7 @@ build:
 	@rm -r $(CURDIR)/mysql/data
 	@echo Building web container
 	@echo cleaning up stale files
-	@sudo rm -rf $(VCLSOURCEDIR)/web/.ht-inc/conf.php $(VCLSOURCEDIR)/web/.ht-inc/cryptkey/ $(VCLSOURCEDIR)/web/.ht-inc/keys.pem $(VCLSOURCEDIR)/web/.ht-inc/pubkey.pem $(VCLSOURCEDIR)/web/.ht-inc/secrets.php
+	@sudo rm -rf $(VCLSOURCEDIR)/web/.ht-inc/conf.php $(VCLSOURCEDIR)/web/.ht-inc/cryptkey/cryptkeyid $(VCLSOURCEDIR)/web/.ht-inc/cryptkey/private.pem $(VCLSOURCEDIR)/web/.ht-inc/keys.pem $(VCLSOURCEDIR)/web/.ht-inc/pubkey.pem $(VCLSOURCEDIR)/web/.ht-inc/secrets.php
 	@echo copying web source code files from $(VCLSOURCEDIR)/web to $(CURDIR)/web/src	
 	@cp -rf $(VCLSOURCEDIR)/web $(CURDIR)/web/src
 	@docker-compose build web
