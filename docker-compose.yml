@@ -28,6 +28,21 @@ services:
     hostname: web
     image: vcl-web
 
+  managementnode:
+    build: managementnode
+    env_file: .env
+    volumes:
+      - managementnode_logs:/var/log/vcl/
+      - ../vcl/managementnode:/usr/local/vcl/
+    links:
+      - db:db
+    depends_on:
+      - db
+    domainname: vcl.local
+    hostname: managementnode
+    image: vcl-managementnode
+
 volumes:
   mysql_data:
   web_logs:
+  managementnode_logs:

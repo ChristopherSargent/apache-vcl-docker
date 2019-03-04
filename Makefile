@@ -21,6 +21,11 @@ build:
 	@cp -rf $(VCLSOURCEDIR)/web $(CURDIR)/web/src
 	@docker-compose build web
 	@rm -rf $(CURDIR)/web/src
+	@echo Building managementnode container
+	@echo copying managementnode source code files from $(VCLSOURCEDIR)/managementnode to $(CURDIR)/managementnode/src
+	@cp -rf $(VCLSOURCEDIR)/managementnode $(CURDIR)/managementnode/src
+	@docker-compose build managementnode
+	@rm -rf $(CURDIR)/managementnode/src
 
 run:
 	@echo Running containers
@@ -31,6 +36,8 @@ clean:
 	@docker-compose stop
 	@echo Removing stale containers
 	@docker-compose rm -f
+	@echo Removing stale networks
+	@docker network prune -f
 
 ps:
 	@echo showing status
