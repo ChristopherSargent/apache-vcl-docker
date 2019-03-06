@@ -60,5 +60,5 @@ COPY etc/supervisor.d/postfix.conf /etc/supervisor.d/postfix.conf
 WORKDIR /var/www/html
 # enable mounting of vcl source code for development, logs for production and vcl-web-conf for vcl php configuration file
 VOLUME [ "/var/www/html", "/var/log/httpd", "/etc/vcl-web-conf/" ]
-ENTRYPOINT ["/wait-for-it.sh", "db:3306", "--", "/entrypoint.sh"]
-CMD ["/wait-for-it.sh", "db:3306", "--", "/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
+ENTRYPOINT ["/wait-for-it.sh", "-s", "db:3306", "--", "/entrypoint.sh"]
+CMD ["/wait-for-it.sh", "-s", "db:3306", "--", "/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]

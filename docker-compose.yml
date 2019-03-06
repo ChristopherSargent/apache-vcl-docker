@@ -1,4 +1,4 @@
-version:  "3"
+version:  "3.5"
 services:
 
   db:
@@ -9,6 +9,8 @@ services:
     image: vcl-db
     volumes:
       - mysql_data:/var/lib/mysql
+    networks:
+      - database
   
   web:
     build: web
@@ -27,6 +29,9 @@ services:
     domainname: vcl.local
     hostname: web
     image: vcl-web
+    networks:
+      - frontend
+      - database
 
   managementnode:
     build: managementnode
@@ -41,6 +46,36 @@ services:
     domainname: vcl.local
     hostname: managementnode
     image: vcl-managementnode
+    networks:
+      - database
+      - vm_private
+
+networks:
+  frontend:
+    name: vcl_frontend_net
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.10.0/24        
+  
+  database:
+    name: vcl_db_net
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.11.0/24
+    
+  vm_private:
+    name: vcl_vm_private_net
+    driver: bridge
+    driver_opts:
+      com.docker.network.parent: "ens224"
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.12.0/24
 
 volumes:
   mysql_data:

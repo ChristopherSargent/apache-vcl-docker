@@ -157,5 +157,5 @@ COPY etc/supervisor.d/postfix.conf /etc/supervisor.d/postfix.conf
 VOLUME [ "/var/log/vcl", "/usr/local/vcl" ]
 
 WORKDIR /usr/local/vcl
-ENTRYPOINT ["/wait-for-it.sh", "db:3306", "--", "/entrypoint.sh"]
-CMD ["/wait-for-it.sh", "db:3306", "--", "/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
+ENTRYPOINT ["/wait-for-it.sh", "-s", "db:3306", "--", "/entrypoint.sh"]
+CMD ["/wait-for-it.sh", "-s", "db:3306", "--", "/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
