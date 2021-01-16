@@ -1,4 +1,4 @@
 FROM mysql:5.6
-LABEL maintainer="Syed Junaid Ali <mailtojunaid@gmail.com>"
+LABEL maintainer="Christopher Sargent christopher.sargent@sargentwalker.com>"
 # Copy VCL Initialization Data
-COPY data/vcl.sql /docker-entrypoint-initdb.d/
+COPY /home/cas/vcl/vcl.sql /docker-entrypoint-initdb.d/
