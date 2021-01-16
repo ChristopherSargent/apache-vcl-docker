@@ -1,5 +1,5 @@
 FROM centos:7
-LABEL maintainer="Syed Junaid Ali <mailtojunaid@gmail.com>"
+LABEL maintainer="christopher.sargent@sargentwalker.io>"
 RUN yum install epel-release -y && yum update -y && yum install -y \
 	httpd \
 	mod_ssl \
